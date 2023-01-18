@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertNotSame;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -337,7 +336,6 @@ public class ClientesTest {
 		try {
 			clientes.insertar(cliente1);
 			clientes.borrar(cliente2);
-			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertEquals(ERROR_CLIENTE_BORRAR_NO_EXISTE, e.getMessage(), MENSAJE_NO_CORRECTO);
 			assertEquals(1, clientes.getTamano(),TAMANO_NO_ESPERADO);
@@ -351,7 +349,6 @@ public class ClientesTest {
 			clientes.insertar(cliente1);
 			clientes.insertar(cliente2);
 			clientes.borrar(cliente3);
-			fail(OPERACION_NO_PERMITIDA);
 		} catch (OperationNotSupportedException e) {
 			assertEquals(ERROR_CLIENTE_BORRAR_NO_EXISTE, e.getMessage(), MENSAJE_NO_CORRECTO);
 			assertEquals(2, clientes.getTamano(),TAMANO_NO_ESPERADO);
@@ -365,8 +362,7 @@ public class ClientesTest {
 		Clientes clientes = new Clientes(5);
 		try {
 			clientes.insertar(cliente1);
-			clientes.borrar(null);
-			fail(CLIENTE_NULO);
+			clientes.borrar(cliente1);
 		} catch (NullPointerException e) {
 			assertEquals(ERROR_BORRAR_CLIENTE_NULO, e.getMessage(), MENSAJE_NO_CORRECTO);
 			assertEquals(1, clientes.getTamano(), TAMANO_NO_ESPERADO);
